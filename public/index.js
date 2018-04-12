@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded', function(){
         drawBrush(event.x, event.y, brushSize);
         break;
       case 'triangle':
-        drawTriangle(event.x, event.y);
+        drawTriangle(event);
         break;
       default:
         drawBrush(event.x, event.y, brushSize);
