@@ -1,6 +1,7 @@
 // initialize brushSize
 let brushSize = 20;
 let colour = 'black';
+let cursorMode = 'brush';
 
 
 window.addEventListener('DOMContentLoaded', function(){
@@ -31,7 +32,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
   // MAKE TRIANGLE
-  //  change what cursor does if Triangle
+  //  change what cursor does if Triangle is selected
+  //
 
 
   // ANTIPENCIL
@@ -51,13 +53,16 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
   // DRAW CIRCLE
-  const drawCircle = function(x, y, brushSize){
+  const drawBrush = function(x, y, brushSize){
     context.beginPath();
     context.arc(x, y, brushSize, 0, Math.PI*2);
     context.fill();
   }
 
+  // DRAW TRIANGLE
 
+  // event is Click action
+  // click action does different things depending on what cursor mode is
 
   // MOUSE CLICK
   let pressedMouse = false;
@@ -70,9 +75,25 @@ window.addEventListener('DOMContentLoaded', function(){
     pressedMouse = false;
   })
 
+
   canvas.onmousemove = function(event){
     if (pressedMouse){
-      drawCircle(event.x, event.y, brushSize);
+      clickAction();
+    }
+  }
+
+  const clickAction = function(){
+
+    switch (cursorMode){
+      case 'brush':
+        drawBrush(event.x, event.y, brushSize);
+        break;
+      case 'triangle':
+        drawTriangle(event.x, event.y, brushSize);
+        break;
+      default:
+        drawBrush(event.x, event.y, brushSize);
+        break;
     }
   }
 
